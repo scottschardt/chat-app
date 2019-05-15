@@ -1,26 +1,26 @@
-let socket = io();
+var socket = io();
 
-let form = document.querySelector('form');
+var form = document.querySelector('form');
 
 form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    let input = document.querySelector('#message');
-    let text = input.nodeValue;
-    socket.emit('message', text);
-    input.value = '';
+  e.preventDefault();
+  var input = document.querySelector('#message');
+  var text = input.value;
+  socket.emit('message', text);
+  input.value = '';
 });
+
 socket.on('message', function(text) {
-    if(!text) {
-        return;
-    }
-    let container = document.querySelector('section');
-    let newMessage = document.createElement('p');
-    newMessage.innerText = text;
-    container.appendChild(newMessage);
-    
-    let seperator = document.createElement('br');
-    container.appendChild(seperator);
+  if (!text) {
+    return;
+  }
+  var container = document.querySelector('section');
+  var newMessage = document.createElement('p');
+  newMessage.innerText = text;
+  container.appendChild(newMessage);
 
-    container.scrollTop = container.scrollHeight;
+  var seperator = document.createElement('br');
+  container.appendChild(seperator);
 
+  container.scrollTop = container.scrollHeight;
 });
